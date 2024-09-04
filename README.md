@@ -1,42 +1,22 @@
-# Content v2 Minimal Starter
+## Installation
 
-Look at the [Content documentation](https://content.nuxt.com/) to learn more.
-
-## Setup
-
-Make sure to install the dependencies:
+Install this template by running the following command:
 
 ```bash
-# yarn
-yarn install
+pnpm dlx giget@latest gh:teygeta/nuxt-doc <project-name>
+```
 
-# npm
-npm install
+Then, navigate to the project directory and install the dependencies:
 
-# pnpm
+```bash
+cd <project-name>
 pnpm install
 ```
 
-## Development Server
-
-Start the development server on http://localhost:3000
+After that, you can start the development server:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+That's it! You can now start writing your documentation.
