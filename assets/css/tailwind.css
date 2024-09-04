@@ -16,15 +16,11 @@
 }
 
 @layer base {
-  body, html {
+  html {
     @apply bg-[#0e0e0e] !text-white
   }
 
   h3 {
     @apply font-semibold
-  }
-
-  ul a {
-    @apply text-neutral-500 hover:underline
   }
 }

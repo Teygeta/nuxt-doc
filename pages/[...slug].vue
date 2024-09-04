@@ -14,6 +14,10 @@ const router = useRouter()
 
 <template>
   <div>
+    <div
+      class="fixed h-[350px] -z-10 inset-0 w-full [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
+    />
+
     <HeadlessTransitionRoot as="template" :show="sidebarOpen">
       <HeadlessDialog class="relative z-50 lg:hidden" @close="sidebarOpen = false">
         <HeadlessTransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100" leave-to="opacity-0">
@@ -64,7 +68,17 @@ const router = useRouter()
 
         <nav class="text-sm space-y-4">
           <section v-for="(item, index) in navigation" :key="index">
-            <h2 v-if="item._path !== '/'" class="mb-2">
+            <NuxtLink
+              v-if="!item.children && item._path !== '/'"
+              :to="item._path"
+              class="text-neutral-500 hover:underline"
+              :class="{
+                'text-blue-400': item._path === router.currentRoute.value.path,
+              }"
+            >
+              {{ item.title }}
+            </NuxtLink>
+            <h2 v-else-if="item._path !== '/'" class="mb-2">
               {{ item.title }}
             </h2>
             <ul class="space-y-1">
@@ -74,6 +88,7 @@ const router = useRouter()
               >
                 <NuxtLink
                   :to="c._path"
+                  class="text-neutral-500 hover:underline"
                   :class="{
                     'text-blue-400': c._path === router.currentRoute.value.path,
                   }"
@@ -86,7 +101,7 @@ const router = useRouter()
         </nav>
       </aside>
 
-      <main class="md:ml-52 px-4 z-10">
+      <main class="md:ml-52 px-4">
         <ContentDoc class="prose-edit" />
       </main>
     </div>
