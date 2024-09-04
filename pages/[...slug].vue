@@ -21,22 +21,49 @@ const router = useRouter()
     <HeadlessTransitionRoot as="template" :show="sidebarOpen">
       <HeadlessDialog class="relative z-50 lg:hidden" @close="sidebarOpen = false">
         <HeadlessTransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100" leave-to="opacity-0">
-          <div class="fixed inset-0" />
+          <div class="fixed inset-0 backdrop-blur-sm" />
         </HeadlessTransitionChild>
 
         <div class="fixed inset-0 flex">
           <HeadlessTransitionChild as="template" enter="transition ease-in-out duration-300 transform" enter-from="-translate-x-full" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0" leave-to="-translate-x-full">
-            <HeadlessDialogPanel class="relative mr-16 flex w-full max-w-xs flex-1">
+            <HeadlessDialogPanel class="relative mr-16 flex w-full max-w-xs flex-1 bg-black">
               <HeadlessTransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
-                <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
+                <div class="absolute left-full top-0 flex w-16 justify-center pt-5 ">
                   <button type="button" class="-m-2.5 p-2.5" @click="sidebarOpen = false">
                     <span class="sr-only">Close sidebar</span>
                     <XMarkIcon class="h-6 w-6 text-white" aria-hidden="true" />
                   </button>
                 </div>
               </HeadlessTransitionChild>
-              <!-- Sidebar component, swap this element with another sidebar if you like -->
-              ok
+              <nav class="text-sm space-y-6 m-5">
+                <section v-for="(item, index) in navigation" :key="index">
+                  <NuxtLink
+                    v-if="!item.children && item._path !== '/'"
+                    :to="item._path"
+                    class="hover:underline"
+                    :class="item._path === router.currentRoute.value.path ? 'text-blue-400' : 'text-neutral-500'"
+                  >
+                    {{ item.title }}
+                  </NuxtLink>
+                  <h2 v-else-if="item._path !== '/'" class="mb-6">
+                    {{ item.title }}
+                  </h2>
+                  <ul class="space-y-3">
+                    <li
+                      v-for="(c, _index) in item.children"
+                      :key="_index"
+                    >
+                      <NuxtLink
+                        :to="c._path"
+                        class="hover:underline"
+                        :class="c._path === router.currentRoute.value.path ? 'text-blue-400' : 'text-neutral-500'"
+                      >
+                        {{ c.title }}
+                      </NuxtLink>
+                    </li>
+                  </ul>
+                </section>
+              </nav>
             </HeadlessDialogPanel>
           </HeadlessTransitionChild>
         </div>
@@ -44,18 +71,13 @@ const router = useRouter()
     </HeadlessTransitionRoot>
 
     <header class="md:hidden bg-transparent flex justify-between items-center p-2">
-      <div>
-        <NuxtLink to="/" class="font-semibold text-2xl">
-          Documentation
-        </NuxtLink>
-      </div>
+      <div />
       <button
         type="button"
         @click="() => sidebarOpen = !sidebarOpen"
       >
         <span class="sr-only">Open sidebar</span>
-        <XMarkIcon v-if="sidebarOpen" class="size-6 text-white" aria-hidden="true" />
-        <Bars2Icon v-else class="size-6 text-white" aria-hidden="true" />
+        <Bars2Icon class="size-6 text-white" aria-hidden="true" />
       </button>
     </header>
 
@@ -71,13 +93,11 @@ const router = useRouter()
             <NuxtLink
               v-if="!item.children && item._path !== '/'"
               :to="item._path"
-              class="text-neutral-500 hover:underline"
+              class="hover:underline"
               :class="{
                 'text-blue-400': item._path === router.currentRoute.value.path,
               }"
-            >
-              {{ item.title }}
-            </NuxtLink>
+            />
             <h2 v-else-if="item._path !== '/'" class="mb-2">
               {{ item.title }}
             </h2>
@@ -88,10 +108,8 @@ const router = useRouter()
               >
                 <NuxtLink
                   :to="c._path"
-                  class="text-neutral-500 hover:underline"
-                  :class="{
-                    'text-blue-400': c._path === router.currentRoute.value.path,
-                  }"
+                  class="hover:underline"
+                  :class="c._path === router.currentRoute.value.path ? 'text-blue-400' : 'text-neutral-500'"
                 >
                   {{ c.title }}
                 </NuxtLink>
