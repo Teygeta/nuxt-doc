@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import {
-  Bars2Icon,
+  Bars3Icon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 
@@ -35,6 +35,9 @@ const router = useRouter()
                 </div>
               </HeadlessTransitionChild>
               <nav class="m-5 space-y-6 text-sm">
+                <NuxtLink to="/" class="mb-5 text-2xl font-semibold">
+                  Documentation
+                </NuxtLink>
                 <section v-for="(item, index) in navigation" :key="index">
                   <NuxtLink
                     v-if="!item.children && item._path !== '/'"
@@ -44,7 +47,7 @@ const router = useRouter()
                   >
                     {{ item.title }}
                   </NuxtLink>
-                  <h2 v-else-if="item._path !== '/'" class="mb-6">
+                  <h2 v-else-if="item._path !== '/'" class="mb-4">
                     {{ item.title }}
                   </h2>
                   <ul class="space-y-3">
@@ -62,6 +65,23 @@ const router = useRouter()
                     </li>
                   </ul>
                 </section>
+                <section>
+                  <h2 class="my-4">
+                    Links
+                  </h2>
+                  <ul class="space-y-3">
+                    <li>
+                      <a target="_blank" to="https://github.com/Teygeta/nuxt-doc" class="hover:underline text-neutral-500">
+                        GitHub
+                      </a>
+                    </li>
+                    <li>
+                      <a target="_blank" to="https://x.com/vitto_gi_" class="hover:underline text-neutral-500">
+                        X
+                      </a>
+                    </li>
+                  </ul>
+                </section>
               </nav>
             </HeadlessDialogPanel>
           </HeadlessTransitionChild>
@@ -70,13 +90,15 @@ const router = useRouter()
     </HeadlessTransitionRoot>
 
     <header class="flex items-center justify-between p-2 bg-transparent md:hidden">
-      <div />
+      <NuxtLink to="/" class="text-2xl font-semibold">
+        Documentation
+      </NuxtLink>
       <button
         type="button"
         @click="() => sidebarOpen = !sidebarOpen"
       >
         <span class="sr-only">Open sidebar</span>
-        <Bars2Icon class="text-white size-6" aria-hidden="true" />
+        <Bars3Icon class="text-white size-6" aria-hidden="true" />
       </button>
     </header>
 
@@ -112,6 +134,23 @@ const router = useRouter()
                 >
                   {{ c.title }}
                 </NuxtLink>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2 class="mt-4 mb-2">
+              Links
+            </h2>
+            <ul class="space-y-1">
+              <li>
+                <a target="_blank" to="https://github.com/Teygeta/nuxt-doc" class="hover:underline text-neutral-500">
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a target="_blank" to="https://x.com/vitto_gi_" class="hover:underline text-neutral-500">
+                  X
+                </a>
               </li>
             </ul>
           </section>
