@@ -3,13 +3,13 @@
 Install this template by running the following command:
 
 ```bash
-pnpm dlx giget@latest gh:teygeta/nuxt-doc
+pnpm dlx giget@latest gh:teygeta/nuxt-doc doc
 ```
 
 Then, navigate to the project directory and install the dependencies:
 
 ```bash
-cd nuxt-doc
+cd doc
 pnpm install
 ```
 
