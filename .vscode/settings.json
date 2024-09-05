@@ -57,5 +57,8 @@
     "**/dist": true,
     "**/.nuxt": true,
     "**/.output": true
-  }
+  },
+  "cSpell.words": [
+    "Nuxt"
+  ]
 }

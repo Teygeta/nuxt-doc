@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import {
   Bars2Icon,
-  Cog6ToothIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 
@@ -26,16 +25,16 @@ const router = useRouter()
 
         <div class="fixed inset-0 flex">
           <HeadlessTransitionChild as="template" enter="transition ease-in-out duration-300 transform" enter-from="-translate-x-full" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0" leave-to="-translate-x-full">
-            <HeadlessDialogPanel class="relative mr-16 flex w-full max-w-xs flex-1 bg-black">
+            <HeadlessDialogPanel class="relative flex flex-1 w-full max-w-xs mr-16 bg-black">
               <HeadlessTransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
-                <div class="absolute left-full top-0 flex w-16 justify-center pt-5 ">
+                <div class="absolute top-0 flex justify-center w-16 pt-5 left-full ">
                   <button type="button" class="-m-2.5 p-2.5" @click="sidebarOpen = false">
                     <span class="sr-only">Close sidebar</span>
-                    <XMarkIcon class="h-6 w-6 text-white" aria-hidden="true" />
+                    <XMarkIcon class="w-6 h-6 text-white" aria-hidden="true" />
                   </button>
                 </div>
               </HeadlessTransitionChild>
-              <nav class="text-sm space-y-6 m-5">
+              <nav class="m-5 space-y-6 text-sm">
                 <section v-for="(item, index) in navigation" :key="index">
                   <NuxtLink
                     v-if="!item.children && item._path !== '/'"
@@ -70,25 +69,25 @@ const router = useRouter()
       </HeadlessDialog>
     </HeadlessTransitionRoot>
 
-    <header class="md:hidden bg-transparent flex justify-between items-center p-2">
+    <header class="flex items-center justify-between p-2 bg-transparent md:hidden">
       <div />
       <button
         type="button"
         @click="() => sidebarOpen = !sidebarOpen"
       >
         <span class="sr-only">Open sidebar</span>
-        <Bars2Icon class="size-6 text-white" aria-hidden="true" />
+        <Bars2Icon class="text-white size-6" aria-hidden="true" />
       </button>
     </header>
 
-    <div class="max-w-5xl mt-20 mx-auto">
+    <div class="max-w-5xl mx-auto mt-20">
       <!-- Static sidebar for desktop -->
-      <aside class="hidden md:fixed md:flex flex-col ml-4">
-        <NuxtLink to="/" class="font-semibold text-2xl mb-5">
+      <aside class="flex-col hidden ml-4 md:fixed md:flex">
+        <NuxtLink to="/" class="mb-5 text-2xl font-semibold">
           Documentation
         </NuxtLink>
 
-        <nav class="text-sm space-y-4">
+        <nav class="space-y-4 text-sm">
           <section v-for="(item, index) in navigation" :key="index">
             <NuxtLink
               v-if="!item.children && item._path !== '/'"
@@ -119,7 +118,7 @@ const router = useRouter()
         </nav>
       </aside>
 
-      <main class="md:ml-52 px-4">
+      <main class="px-4 md:ml-52">
         <ContentDoc class="prose-edit" />
       </main>
     </div>
