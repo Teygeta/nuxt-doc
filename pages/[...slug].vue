@@ -9,6 +9,14 @@ const sidebarOpen = ref(false)
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
 const router = useRouter()
+
+const githubStars = ref(0)
+
+onMounted(async () => {
+  const res = await fetch('https://api.github.com/repos/teygeta/nuxt-doc')
+  const data = await res.json()
+  githubStars.value = data.stargazers_count
+})
 </script>
 
 <template>
@@ -71,13 +79,13 @@ const router = useRouter()
                   </h2>
                   <ul class="space-y-3">
                     <li>
-                      <a target="_blank" to="https://github.com/Teygeta/nuxt-doc" class="hover:underline text-neutral-500">
-                        GitHub
+                      <a target="_blank" href="https://github.com/Teygeta/nuxt-doc" class="hover:underline text-neutral-500">
+                        GitHub ({{ githubStars }})
                       </a>
                     </li>
                     <li>
-                      <a target="_blank" to="https://x.com/vitto_gi_" class="hover:underline text-neutral-500">
-                        X
+                      <a target="_blank" href="https://x.com/vitto_gi_" class="hover:underline text-neutral-500">
+                        𝕏 - Twitter
                       </a>
                     </li>
                   </ul>
@@ -143,13 +151,13 @@ const router = useRouter()
             </h2>
             <ul class="space-y-1">
               <li>
-                <a target="_blank" to="https://github.com/Teygeta/nuxt-doc" class="hover:underline text-neutral-500">
-                  GitHub
+                <a target="_blank" href="https://github.com/Teygeta/nuxt-doc" class="hover:underline text-neutral-500">
+                  GitHub ({{ githubStars }})
                 </a>
               </li>
               <li>
-                <a target="_blank" to="https://x.com/vitto_gi_" class="hover:underline text-neutral-500">
-                  X
+                <a target="_blank" href="https://x.com/vitto_gi_" class="hover:underline text-neutral-500">
+                  𝕏 - Twitter
                 </a>
               </li>
             </ul>
