@@ -11,10 +11,31 @@ const router = useRouter()
 
 const githubStars = ref(0)
 
+function animateStars(target: number) {
+  let current = 0
+  const duration = 5000
+  const start = performance.now()
+
+  function step(now: number) {
+    const progress = Math.min((now - start) / duration, 1)
+    const eased = 1 - (1 - progress) ** 3
+    current = Math.floor(eased * target)
+    githubStars.value = current
+    if (progress < 1) {
+      requestAnimationFrame(step)
+    }
+    else {
+      githubStars.value = target
+    }
+  }
+
+  requestAnimationFrame(step)
+}
+
 onMounted(async () => {
   const res = await fetch('https://api.github.com/repos/teygeta/nuxt-doc')
   const data = await res.json()
-  githubStars.value = data.stargazers_count
+  animateStars(data.stargazers_count)
 })
 </script>
 
